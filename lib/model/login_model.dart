@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 
@@ -13,7 +14,7 @@ class PostLoginModel {
 
       var response = await http.post(url,
           headers: {"Content-Type": "application/json", 'x-api-key': ApiRoute.API_KEY},
-          body: json.encode({'email': username, 'password': password}));
+          body: json.encode({'name': username, 'password': password}));
 
       var decodedResponse = json.decode(response.body);
 

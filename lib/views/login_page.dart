@@ -85,7 +85,7 @@ class _LoginView extends State<LoginPage> {
                           ),
                           FormBuilderTextField(
                             name: "username",
-                            decoration: const InputDecoration(labelText: "Nama/Email"),
+                            decoration: const InputDecoration(labelText: "Nama"),
                             controller: widget.usernameController,
                             validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
                           ),
@@ -115,14 +115,14 @@ class _LoginView extends State<LoginPage> {
                                     content: const Text('Processing Data'),
                                     backgroundColor: Colors.green.shade300,
                                   ));
-                                  var loginResponse = await PostLoginModel.sendRequest(
+                                  var response = await PostLoginModel.sendRequest(
                                       widget.usernameController.text, widget.passwordController.text);
-                                  if (loginResponse['login']['success']) {
+                                  if (response['login']['success']) {
                                     if (context.mounted) {
                                       Navigator.pushAndRemoveUntil(
                                         context,
-                                        MaterialPageRoute(builder: (context) => HomePage()),
-                                            (route) => false,
+                                        MaterialPageRoute(builder: (context) => const HomePage()),
+                                        (route) => false,
                                       );
                                     }
                                   } else {
@@ -132,7 +132,7 @@ class _LoginView extends State<LoginPage> {
                                         artDialogArgs: ArtDialogArgs(
                                           type: ArtSweetAlertType.danger,
                                           title: "Gagal!",
-                                          text: loginResponse['login']['message'],
+                                          text: response['login']['message'],
                                         ),
                                       );
                                     }
@@ -142,6 +142,22 @@ class _LoginView extends State<LoginPage> {
                               child: const Text(
                                 'Login',
                                 style: TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: TextButton(
+                              style: ButtonStyle(
+                                padding: MaterialStateProperty.all<EdgeInsets>(
+                                  const EdgeInsets.symmetric(vertical: 16),
+                                ),
+                              ),
+                              onPressed: () {
+                                widget._formKey.currentState?.reset();
+                              },
+                              child: const Text(
+                                'Clear',
+                                style: TextStyle(color: Color.fromRGBO(251,188,6, 1), fontSize: 20),
                               ),
                             ),
                           ),
