@@ -12,8 +12,6 @@ class SideBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = box.read('dataLogin')['user'] ?? "";
-    final detailUser = box.read('dataLogin')['user']['detail_user'] ?? "";
     void NavigasiKe(routeName){
       if(ModalRoute.of(context)?.settings.name != routeName) {
         Navigator.pushNamed(context, routeName);
@@ -54,6 +52,11 @@ class SideBar extends StatelessWidget {
             title: const Text("Service Printer"),
             onTap: () {
               NavigasiKe(AppRoute.servicePrinterRoute);
+            },
+          ),ListTile(
+            title: const Text("Riwayat pembelian"),
+            onTap: () {
+              NavigasiKe(AppRoute.riwayatPembelianRoute);
             },
           ),ListTile(
             title: const Text("Logout"),

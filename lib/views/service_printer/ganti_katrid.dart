@@ -4,7 +4,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:upj_rpl/model/service_print_model.dart';
 import 'package:upj_rpl/views/components/app_bar_component.dart';
 import 'package:intl/intl.dart';
-import 'package:upj_rpl/views/service_printer_page.dart';
 
 class GantiKatridPage extends StatelessWidget {
   static const String routeName = 'service/ganti-katrid';

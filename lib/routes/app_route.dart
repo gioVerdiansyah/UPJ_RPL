@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:upj_rpl/views/riwayat_pembelian_page.dart';
 import 'package:upj_rpl/views/service_printer/ganti_katrid.dart';
 import 'package:upj_rpl/views/service_printer_page.dart';
 
@@ -24,11 +25,13 @@ class AppRoute{
   static const String loginRoute = LoginPage.routeName;
   static const String servicePrinterRoute = ServicePrinterPage.routeName;
   static const String gantiKatridRoute = GantiKatridPage.routeName;
+  static const String riwayatPembelianRoute = RiwayatPembelianPage.routeName;
 
   static Map<String, WidgetBuilder> routes = {
     homeRoute: (context) => const HomePage(),
     loginRoute: (context) => LoginPage(),
     servicePrinterRoute: (context) => const ServicePrinterPage(),
-    gantiKatridRoute: (context) => GantiKatridPage()
+    gantiKatridRoute: (context) => GantiKatridPage(),
+    riwayatPembelianRoute: (context) => const RiwayatPembelianPage(),
   };
 }

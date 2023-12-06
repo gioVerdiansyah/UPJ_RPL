@@ -5,4 +5,5 @@ class ApiRoute{
 
   static final Uri loginRoute = Uri.parse("${dotenv.get("API_URL")}/login");
   static final Uri serviceKatridRoute = Uri.parse("${dotenv.get("API_URL")}/service-printer/katrid");
+  static final Uri getRiwayatPembelianRoute = Uri.parse("${dotenv.get("API_URL")}/riwayat-pembelian");
 }
