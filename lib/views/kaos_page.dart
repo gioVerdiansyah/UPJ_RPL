@@ -3,15 +3,15 @@ import 'package:upj_rpl/routes/app_route.dart';
 import 'package:upj_rpl/views/components/app_bar_component.dart';
 import 'package:upj_rpl/views/components/side_bar_component.dart';
 
-class ServicePrinterPage extends StatefulWidget{
-  const ServicePrinterPage({super.key});
-  static const String routeName = 'service-printer';
+class KaosPage extends StatefulWidget{
+  const KaosPage({super.key});
+  static const String routeName = '/kaos';
 
   @override
-  State<ServicePrinterPage> createState() => _ServicePrinterView();
+  State<KaosPage> createState() => _ServicePrinterView();
 }
 
-class _ServicePrinterView extends State<ServicePrinterPage>{
+class _ServicePrinterView extends State<KaosPage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -25,7 +25,7 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                 padding: EdgeInsets.only(bottom: 20),
                 child: Center(
                     child: Text(
-                      "Service Printer",
+                      "Desgin Kaos",
                       style: TextStyle(fontSize: 30),
                     )),
               ),
@@ -39,7 +39,7 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                         child: Column(
                           children: [
                             const Text(
-                              'Ganti Katrid',
+                              'Design Kaos',
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                             ),
                             Container(
@@ -50,7 +50,7 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                               child: Text(
-                                  'Ganti katrid printer dengan mudah dan cepat. Dapatkan layanan terpercaya untuk hasil cetak yang tajam dan berkualitas.',
+                                  'Desain kaos kreatif dan unik, sesuai gaya Anda. Dapatkan kreasi pakaian yang membedakan dengan layanan desain kaos kami.',
                                   style: TextStyle(fontSize: 12),
                                   textAlign: TextAlign.left),
                             ),
@@ -63,13 +63,13 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                               padding: const EdgeInsets.only(top: 5),
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(context, AppRoute.serviceKatridRoute);
+                                  Navigator.pushNamed(context, AppRoute.designKaosRoute);
                                 },
                                 child: const Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Service Sekarang",
+                                      "Design Sekarang",
                                       style: TextStyle(
                                         fontSize: 10,
                                       ),
@@ -91,7 +91,7 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                           child: Column(
                             children: [
                               const Text(
-                                'Isi Tinta',
+                                'Cetak Kaos',
                                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                               ),
                               Container(
@@ -102,7 +102,7 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                               const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                 child: Text(
-                                    'Isi tinta printer dengan cepat dan praktis. Layanan kami siap memastikan kelancaran hasil cetak Anda.',
+                                    'Cetak kaos berkualitas tinggi dengan desain Anda sendiri. Layanan kami memberikan hasil cetak yang tajam dan awet untuk memenuhi kebutuhan pakaian Anda.',
                                     style: TextStyle(fontSize: 12),
                                     textAlign: TextAlign.left),
                               ),
@@ -115,13 +115,13 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                                 padding: const EdgeInsets.only(top: 5),
                                 child: InkWell(
                                   onTap: (){
-                                    Navigator.pushNamed(context, AppRoute.serviceTintaRoute);
+                                    Navigator.pushNamed(context, AppRoute.cetakKaosRoute);
                                   },
                                   child: const Row(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Service Sekarang",
+                                        "Cetak Sekarang",
                                         style: TextStyle(
                                           fontSize: 10,
                                         ),
@@ -142,7 +142,7 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                         child: Column(
                           children: [
                             const Text(
-                              'Ganti Roll',
+                              'Beli Kaos',
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                             ),
                             Container(
@@ -153,7 +153,7 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                               child: Text(
-                                  'Ganti roll printer tanpa repot. Layanan kami memastikan kelancaran cetak dengan pergantian roll yang cepat dan efisien.',
+                                  'Beli kaos berkualitas tinggi dengan gaya unik. Temukan koleksi pakaian terbaik untuk melengkapi penampilan Anda.',
                                   style: TextStyle(fontSize: 12),
                                   textAlign: TextAlign.left),
                             ),
@@ -166,13 +166,13 @@ class _ServicePrinterView extends State<ServicePrinterPage>{
                               padding: const EdgeInsets.only(top: 5),
                               child: InkWell(
                                 onTap: (){
-                                  Navigator.pushNamed(context, AppRoute.serviceRollRoute);
+                                  Navigator.pushNamed(context, AppRoute.beliKaosRoute);
                                 },
                                 child: const Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Service Sekarang",
+                                      "Beli Sekarang",
                                       style: TextStyle(
                                         fontSize: 10,
                                       ),

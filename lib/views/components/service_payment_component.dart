@@ -1,24 +1,40 @@
 import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:upj_rpl/model/service_print_model.dart';
-import 'package:upj_rpl/views/components/app_bar_component.dart';
 import 'package:intl/intl.dart';
 
-class GantiKatridPage extends StatelessWidget {
-  static const String routeName = 'service/ganti-katrid';
+import '../../model/payment_model.dart';
 
-  double hargaBahan = 105000;
-  double hargaJasa = 15000;
-  String bahanBahan = "Wadah Plastik(1x), Spon(1x), Chip(1x)";
+class ServicePaymentComponent extends StatefulWidget {
+  ServicePaymentComponent(
+      {super.key,
+      required this.hargaBahan,
+      required this.hargaJasa,
+      required this.bahanBahan,
+      required this.type,
+      required this.title,
+      this.titleButton = 'service'});
+  final double hargaBahan;
+  final double hargaJasa;
+  final String bahanBahan;
+  final String type;
+  final String title;
+  final String titleButton;
 
-  GantiKatridPage({super.key});
+  @override
+  State<ServicePaymentComponent> createState() => _ServicePaymentView();
+}
+
+class _ServicePaymentView extends State<ServicePaymentComponent> {
   @override
   Widget build(BuildContext context) {
-    GetStorage box = GetStorage();
+    double hargaBahan = widget.hargaBahan;
+    double hargaJasa = widget.hargaJasa;
+    String bahanBahan = widget.bahanBahan;
+    String type = widget.type;
+    String title = widget.type;
+    String titleButton = widget.titleButton;
     double total = hargaBahan + hargaJasa;
     return Scaffold(
-      appBar: const AppBarComponent(),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
@@ -33,7 +49,7 @@ class GantiKatridPage extends StatelessWidget {
                     child: Column(
                       children: [
                         const Text('Pembayaran', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        const Text('Service ganti katrid', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                        Text('${title}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Container(
@@ -48,12 +64,17 @@ class GantiKatridPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("Biaya Bahan", style: TextStyle(fontWeight: FontWeight.bold)),
-                          Text(bahanBahan),
-                        ],
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text("Biaya Bahan", style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text(
+                              bahanBahan,
+                              overflow: TextOverflow.visible,
+                            ),
+                          ],
+                        ),
                       ),
                       Text(NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(hargaBahan))
                     ],
@@ -102,7 +123,7 @@ class GantiKatridPage extends StatelessWidget {
                         content: const Text('Processing Data'),
                         backgroundColor: Colors.green.shade300,
                       ));
-                      var response = await ServicePrintModel.sendPost(hargaBahan, hargaJasa);
+                      var response = await PaymentModel.sendPost(hargaBahan, hargaJasa, type);
                       if (response['service']['success']) {
                         if (context.mounted) {
                           ArtSweetAlert.show(
@@ -110,7 +131,7 @@ class GantiKatridPage extends StatelessWidget {
                             artDialogArgs: ArtDialogArgs(
                               type: ArtSweetAlertType.success,
                               title: "Berhasil!",
-                              text: "Berhasil meservice katrid",
+                              text: "Berhasil meservice ${type}",
                             ),
                           );
                         }
@@ -135,9 +156,9 @@ class GantiKatridPage extends StatelessWidget {
                         color: Colors.blue, // Warna background
                         borderRadius: BorderRadius.circular(10), // Border radius
                       ),
-                      child: const Text(
-                        "Service Sekarang",
-                        style: TextStyle(
+                      child: Text(
+                        "$titleButton Sekarang",
+                        style: const TextStyle(
                           color: Colors.white, // Warna teks
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upj_rpl/routes/app_route.dart';
 import 'package:upj_rpl/views/components/app_bar_component.dart';
 import 'package:upj_rpl/views/components/side_bar_component.dart';
 import 'package:upj_rpl/views/service_printer_page.dart';
@@ -111,20 +112,25 @@ class _HomeView extends State<HomePage> {
                               width: double.infinity,
                               color: Colors.grey,
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(top: 5),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "READ MORE",
-                                    style: TextStyle(
-                                      fontSize: 10,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: InkWell(
+                                onTap: (){
+                                  Navigator.pushNamed(context, AppRoute.serviceKomputerRoute);
+                                },
+                                child: const Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "READ MORE",
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                      ),
                                     ),
-                                  ),
-                                  Icon(Icons.arrow_forward, size: 15)
-                                ],
-                              ),
+                                    Icon(Icons.arrow_forward, size: 15)
+                                  ],
+                                ),
+                              )
                             )
                           ],
                         ),
@@ -157,20 +163,25 @@ class _HomeView extends State<HomePage> {
                             width: double.infinity,
                             color: Colors.grey,
                           ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "READ MORE",
-                                  style: TextStyle(
-                                    fontSize: 10,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.pushNamed(context, AppRoute.kaosRoute);
+                              },
+                              child: const Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "READ MORE",
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                    ),
                                   ),
-                                ),
-                                Icon(Icons.arrow_forward, size: 15)
-                              ],
-                            ),
+                                  Icon(Icons.arrow_forward, size: 15)
+                                ],
+                              ),
+                            )
                           )
                         ],
                       ),

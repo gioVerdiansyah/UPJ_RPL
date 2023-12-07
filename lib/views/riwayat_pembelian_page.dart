@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:upj_rpl/model/get_riwayat_pembelian_model.dart';
+import 'package:upj_rpl/views/components/side_bar_component.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'components/app_bar_component.dart';
 
 class RiwayatPembelianPage extends StatefulWidget {
-  const RiwayatPembelianPage({super.key});
+  RiwayatPembelianPage({super.key});
   static const String routeName = '/riwayat-pembelian';
+  final box = GetStorage();
 
   @override
   State<RiwayatPembelianPage> createState() => _RiwayatIzinView();
@@ -17,6 +22,7 @@ class _RiwayatIzinView extends State<RiwayatPembelianPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarComponent(),
+      drawer: const SideBar(),
       body: FutureBuilder(
         future: GetRiwayatPembelianModel.getData(),
         builder: (context, snapshot) {
@@ -30,10 +36,39 @@ class _RiwayatIzinView extends State<RiwayatPembelianPage> {
               children: [
                 const Center(
                   child: Text(
-                    'Riwayat Penggantian/Perbaikan',
+                    'Riwayat Pembayaran',
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Card(
+                  color: const Color.fromRGBO(252,198,43, 1),
+                  child: InkWell(
+                    onTap: (){
+                      Uri absenTroubleUrl = Uri.parse('${dotenv.get('APP_URL')
+                      }/get-transaction-data?user_id=${widget.box.read('dataLogin')
+                      ['data']['id']}&rm_token=${widget.box.read('dataLogin')
+                      ['data']['remember_token']}');
+                      launchUrl(absenTroubleUrl);
+                    },
+                    child: const SizedBox(
+                      height: 40,
+                      width: double.infinity,
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Cetak Riwayat Pembayaran", style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: Colors.white,
+                            )),
+                            Icon(Icons.local_print_shop_outlined, color: Colors.white,)
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -44,7 +79,6 @@ class _RiwayatIzinView extends State<RiwayatPembelianPage> {
                     itemBuilder: (context, index) {
                       var dataRiwayat = snapshot.data['riwayat']['data'][index];
                       var i = index + 1;
-                      print(dataRiwayat);
                       return Container(
                         child: Card(
                           margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
@@ -53,7 +87,7 @@ class _RiwayatIzinView extends State<RiwayatPembelianPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("#$i Penggantian/Perbaikan ${dataRiwayat['jenis']}",
+                                Text("#$i Pembayaran: ${dataRiwayat['jenis']}",
                                     style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold

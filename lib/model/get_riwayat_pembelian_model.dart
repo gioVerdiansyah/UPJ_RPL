@@ -17,7 +17,6 @@ class GetRiwayatPembelianModel{
       );
 
       var data = json.decode(response.body);
-      print(data);
       return data;
     }catch(e){
       print("Error: $e");
