@@ -1,40 +1,44 @@
 import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:upj_rpl/routes/app_route.dart';
+import 'package:upj_rpl/views/components/app_bar_component.dart';
+import 'package:upj_rpl/views/components/side_bar_component.dart';
 
-import '../../model/payment_model.dart';
+import '../model/payment_model.dart';
 
-class ServicePaymentComponent extends StatefulWidget {
-  ServicePaymentComponent(
+class ServicePaymentPage extends StatefulWidget {
+  ServicePaymentPage(
       {super.key,
       required this.hargaBahan,
       required this.hargaJasa,
-      required this.bahanBahan,
+      required this.jumlahBarang,
       required this.type,
-      required this.title,
-      this.titleButton = 'service'});
+      required this.typePembayaran, required this.jumlahBayar});
   final double hargaBahan;
+  final int jumlahBarang;
   final double hargaJasa;
-  final String bahanBahan;
+  final double jumlahBayar;
   final String type;
-  final String title;
-  final String titleButton;
+  final String typePembayaran;
 
   @override
-  State<ServicePaymentComponent> createState() => _ServicePaymentView();
+  State<ServicePaymentPage> createState() => _ServicePaymentView();
 }
 
-class _ServicePaymentView extends State<ServicePaymentComponent> {
+class _ServicePaymentView extends State<ServicePaymentPage> {
   @override
   Widget build(BuildContext context) {
     double hargaBahan = widget.hargaBahan;
+    int jumlahBarang = widget.jumlahBarang;
+    double jumlahBayar = widget.jumlahBayar;
     double hargaJasa = widget.hargaJasa;
-    String bahanBahan = widget.bahanBahan;
-    String type = widget.type;
-    String title = widget.type;
-    String titleButton = widget.titleButton;
-    double total = hargaBahan + hargaJasa;
+    String tipe = widget.type;
+    String tipePembayaran = widget.typePembayaran;
+    double total = (hargaBahan + hargaJasa) * jumlahBarang;
+    double kembalian = jumlahBayar - total;
     return Scaffold(
+      appBar: const AppBarComponent(),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
@@ -48,8 +52,8 @@ class _ServicePaymentView extends State<ServicePaymentComponent> {
                   Center(
                     child: Column(
                       children: [
-                        const Text('Pembayaran', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        Text('${title}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                        const Text('Struk Pembayaran', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        Text(tipe, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Container(
@@ -64,18 +68,7 @@ class _ServicePaymentView extends State<ServicePaymentComponent> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text("Biaya Bahan", style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text(
-                              bahanBahan,
-                              overflow: TextOverflow.visible,
-                            ),
-                          ],
-                        ),
-                      ),
+                      const Text("Biaya Bahan", style: TextStyle(fontWeight: FontWeight.bold)),
                       Text(NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(hargaBahan))
                     ],
                   ),
@@ -94,6 +87,18 @@ class _ServicePaymentView extends State<ServicePaymentComponent> {
                       Text(NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(hargaJasa))
                     ],
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Jumlah Barang", style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      Text(jumlahBarang.toString())
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 1),
                     child: Container(
@@ -106,15 +111,38 @@ class _ServicePaymentView extends State<ServicePaymentComponent> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Total:", style: TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Text("Total:", style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                       Text(NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(total))
+                    ],
+                  ),Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Text("Jumlah Bayar:", style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                      Text(NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(jumlahBayar))
+                    ],
+                  ),Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Text("Kembalian:", style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                      Text(NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(kembalian))
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Text("Tipe Pembayaran", style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                      Text(tipePembayaran)
                     ],
                   ),
                   InkWell(
@@ -123,16 +151,21 @@ class _ServicePaymentView extends State<ServicePaymentComponent> {
                         content: const Text('Processing Data'),
                         backgroundColor: Colors.green.shade300,
                       ));
-                      var response = await PaymentModel.sendPost(hargaBahan, hargaJasa, type);
-                      if (response['service']['success']) {
+                      var response = await PaymentModel.sendPost(hargaBahan, hargaJasa, tipe, tipePembayaran,
+                        jumlahBarang, jumlahBayar);
+                      if (response['payment']['success']) {
                         if (context.mounted) {
                           ArtSweetAlert.show(
                             context: context,
                             artDialogArgs: ArtDialogArgs(
                               type: ArtSweetAlertType.success,
                               title: "Berhasil!",
-                              text: "Berhasil meservice ${type}",
+                              text: response['payment']['message'],
+                              onConfirm: () {
+                                Navigator.pushNamed(context, AppRoute.homeRoute);
+                              }
                             ),
+                            barrierDismissible: false
                           );
                         }
                       } else {
@@ -142,7 +175,7 @@ class _ServicePaymentView extends State<ServicePaymentComponent> {
                             artDialogArgs: ArtDialogArgs(
                               type: ArtSweetAlertType.danger,
                               title: "Gagal!",
-                              text: response['service']['message'],
+                              text: response['payment']['message'],
                             ),
                           );
                         }
@@ -156,9 +189,9 @@ class _ServicePaymentView extends State<ServicePaymentComponent> {
                         color: Colors.blue, // Warna background
                         borderRadius: BorderRadius.circular(10), // Border radius
                       ),
-                      child: Text(
-                        "$titleButton Sekarang",
-                        style: const TextStyle(
+                      child: const Text(
+                        "Simpan",
+                        style: TextStyle(
                           color: Colors.white, // Warna teks
                         ),
                       ),

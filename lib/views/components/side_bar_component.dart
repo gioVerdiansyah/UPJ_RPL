@@ -49,21 +49,6 @@ class SideBar extends StatelessWidget {
               NavigasiKe(AppRoute.homeRoute);
             },
           ),ListTile(
-            title: const Text("Service Printer"),
-            onTap: () {
-              NavigasiKe(AppRoute.servicePrinterRoute);
-            },
-          ),ListTile(
-            title: const Text("Service Komputer"),
-            onTap: () {
-              NavigasiKe(AppRoute.serviceKomputerRoute);
-            },
-          ),ListTile(
-            title: const Text("Design Kaos"),
-            onTap: () {
-              NavigasiKe(AppRoute.kaosRoute);
-            },
-          ),ListTile(
             title: const Text("Riwayat pembelian"),
             onTap: () {
               NavigasiKe(AppRoute.riwayatPembelianRoute);

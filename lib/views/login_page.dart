@@ -121,7 +121,7 @@ class _LoginView extends State<LoginPage> {
                                     if (context.mounted) {
                                       Navigator.pushAndRemoveUntil(
                                         context,
-                                        MaterialPageRoute(builder: (context) => const HomePage()),
+                                        MaterialPageRoute(builder: (context) => HomePage()),
                                         (route) => false,
                                       );
                                     }
