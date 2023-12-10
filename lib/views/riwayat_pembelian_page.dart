@@ -113,7 +113,7 @@ class _RiwayatIzinView extends State<RiwayatPembelianPage> {
                                 ArtSweetAlert.show(
                                   context: context,
                                   artDialogArgs: ArtDialogArgs(
-                                    type: ArtSweetAlertType.success,
+                                    type: ArtSweetAlertType.danger,
                                     title: "Gagal!",
                                     text: response['payment']['message'],
                                   ),
@@ -177,7 +177,7 @@ class _RiwayatIzinView extends State<RiwayatPembelianPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10),
                                   child: Center(
-                                    child: Container(
+                                    child: SizedBox(
                                       width: 250,
                                       child: Column(
                                         children: [

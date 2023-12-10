@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 
@@ -28,7 +27,7 @@ class PostLoginModel {
     } catch (e) {
       print('Error: $e');
       return {
-        'login': {'success': false, 'message': "Ada Kesalahan Server!"}
+        'login': {'success': false, 'message': "Ada Kesalahan Program: ${e}"}
       };
     }
   }

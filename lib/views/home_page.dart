@@ -35,7 +35,7 @@ class _HomeView extends State<HomePage> {
       body: Container(
           child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Card(
             elevation: 5,
             child: Padding(
@@ -146,7 +146,7 @@ class _HomeView extends State<HomePage> {
                               children: [
                                 const Text("Total Harga: "),
                                 Text(
-                                  widget.totalHarga != null && widget.totalHarga != ''
+                                  widget.totalHarga != ''
                                       ? NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(widget.totalHarga)
                                       : NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(0.0),
                                 ),
@@ -192,7 +192,7 @@ class _HomeView extends State<HomePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
+                      child: Column(
                         children: [
                           ElevatedButton(
                             onPressed: () {
@@ -224,7 +224,7 @@ class _HomeView extends State<HomePage> {
                               children: [
                                 const Text("Total Kembalian: "),
                                 Text(
-                                  widget.totalKembalian != null && widget.totalKembalian != ''
+                                  widget.totalKembalian != ''
                                       ? NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(widget
                                       .totalKembalian)
                                       : NumberFormat.currency(locale: 'id_ID', symbol: 'Rp.').format(0.0),

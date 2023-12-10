@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:upj_rpl/routes/app_route.dart';
 import 'package:upj_rpl/views/components/app_bar_component.dart';
-import 'package:upj_rpl/views/components/side_bar_component.dart';
 
 import '../model/payment_model.dart';
 
 class ServicePaymentPage extends StatefulWidget {
-  ServicePaymentPage(
+  const ServicePaymentPage(
       {super.key,
       required this.hargaBahan,
       required this.hargaJasa,

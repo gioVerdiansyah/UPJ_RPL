@@ -37,12 +37,15 @@ class PaymentModel {
   static Future delete() async {
     try {
       final Uri url = ApiRoute.paymentDeleteRoute;
-      var response = await http.delete(url,
+      var response = await http.post(url,
           headers: {
-            "Content-Type": 'application/json',
+            "Content-Type": "application/json",
             "x-api-key": ApiRoute.API_KEY,
           },
-          body: json.encode({"user_id": box.read('dataLogin')['data']['id']}));
+          body: json.encode(
+              {"user_id": box.read('dataLogin')['data']['id']}
+          )
+      );
 
       var data = json.decode(response.body);
       print(data);
