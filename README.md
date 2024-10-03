@@ -1,6 +1,6 @@
 # upj_rpl
 
-A new Flutter project.
+UPJ RPL Application for exam my school
 
 ## Getting Started
 
